@@ -20,6 +20,8 @@ import ReportInfectedSurvivorsUsecase from '@/application/usecases/report-infect
 import ReportInfectedSurvivorsController from '@/application/controllers/report-infected-survivors.controller';
 import ReportHealthySurvivorsUsecase from '@/application/usecases/report-healthy-survivors.usecase';
 import ReportHealthySurvivorsController from '@/application/controllers/report-healthy-survivors.controller';
+import FindSurvivorByIdUsecase from '@/application/usecases/find-survivor-by-id.usecase';
+import FindSurvivorByIdController from '@/application/controllers/find-survivor-by-id.controller';
 
 @Module({
   imports: [
@@ -35,7 +37,8 @@ import ReportHealthySurvivorsController from '@/application/controllers/report-h
     ListSurvivorsController,
     RequestItemController,
     ReportInfectedSurvivorsController,
-    ReportHealthySurvivorsController
+    ReportHealthySurvivorsController,
+    FindSurvivorByIdController
   ],
   providers: [
     PrismaService,
@@ -55,7 +58,8 @@ import ReportHealthySurvivorsController from '@/application/controllers/report-h
     ListSurvivorsUsecase,
     RequestItemUsecase,
     ReportInfectedSurvivorsUsecase,
-    ReportHealthySurvivorsUsecase
+    ReportHealthySurvivorsUsecase,
+    FindSurvivorByIdUsecase
   ],
 })
 export class AppModule {}
