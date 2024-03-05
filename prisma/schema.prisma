@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Survivor {
+  id          String   @id @default(uuid())
+  name        String
+  birthDate   DateTime
+  gender      String
+  latitude    Float
+  longitude   Float
+  isInfected  Boolean @map("is_infected")
+  infectedAt  DateTime? @map("infected_at")
+  email       String   @unique
+  password    String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  inventory Inventory[]
+
+  @@map("survivors")
+}
+
+model Item {
+  id          String @id @default(uuid())
+  name        String @unique
+  description String
+  removesInfection Boolean @map("removes_infection")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  inventory Inventory[]
+
+  @@map("items")
+}
+
+model Inventory {
+  quantity   Int
+  survivorId String
+  itemId     String
+
+  survivor Survivor @relation(fields: [survivorId], references: [id])
+  item     Item     @relation(fields: [itemId], references: [id])
+
+  @@id([survivorId, itemId])
+  @@map("inventories")
+}
